@@ -8,10 +8,14 @@ module.exports = {
     },
     useNullAsDefault: true,
     migrations: {
+<<<<<<< HEAD
       directory: "./data/migrations"
     },
     seeds: {
       directory: "./data/seeds"
+=======
+      directory: './data/migrations'
+>>>>>>> aa10be3382268cddf58c2d92dca92d050a6592e8
     }
   }
 };
