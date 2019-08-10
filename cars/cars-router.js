@@ -7,7 +7,7 @@ router.get("/", async (req, res) => {
   const cars = await db("cars");
 
   try {
-    res.json(cars);
+    res.status(200).json(cars);
   } catch ({ err }) {
     res.status(500).json({ err, message: "Could not retrieve cars." });
   }
@@ -32,7 +32,7 @@ router.post("/", async (req, res) => {
   const newCar = await db("cars").where({ id });
 
   try {
-    res.status(201).json({ message: "added car." });
+    res.status(201).json({ message: "added car.", newCar });
   } catch ({ err }) {
     res.status(500).json({ err, message: "Could not add car." });
   }
