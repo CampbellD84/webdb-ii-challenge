@@ -38,4 +38,41 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.put("/:id", async (req, res) => {
+  const { id } = req.params;
+  const changes = req.body;
+
+  try {
+    const count = await db("cars")
+      .where({ id })
+      .update(changes);
+
+    if (count) {
+      res.json({ update: count });
+    } else {
+      res.status(404).json({ message: "Could not find car with given id." });
+    }
+  } catch ({ err }) {
+    res.status(500).json({ err, message: "Could not update car." });
+  }
+});
+
+router.delete("/:id", async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const count = await db("cars")
+      .where({ id })
+      .del();
+
+    if (count) {
+      res.json({ removed: count });
+    } else {
+      res.status(404).json({ message: "Could not find car with given id." });
+    }
+  } catch ({ err }) {
+    res.status(500).json({ err, message: "Failed to delete car." });
+  }
+});
+
 module.exports = router;
